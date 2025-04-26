@@ -6,6 +6,7 @@ namespace CoinFlip
 {
     public partial class MainPage : ContentPage
     {
+        Game jogo = new Game();
 
 
         public MainPage()
@@ -24,27 +25,50 @@ namespace CoinFlip
             //Verificar se a opção é igual ao lado escolhido
             //Exibir o resultado do jogo em um alerta (DisplayAlert)
 
-             Random rnd = new Random();
-             int sorteio = rnd.Next(2);
 
-             if (sorteio == 0)
-             {
-                 MoedaImg.Source = "cara.png";
-             }
-             else
-             {
-                 MoedaImg.Source = "coroa.png";
-             }
+            /* COMO FAZER O GIF DA MOEDA 
+            MoedaImg.Source = "giro.gif";
+            MoedaImg.IsAnimationPlaying = true;
+            await Task.Delay(1500);
+            string escolha;
+            MoedaImg.IsAnimationPlaying = false;
+            */
 
-             if (SelecaoPicker.SelectedIndex == sorteio )
+            Coin moeda = new Coin();
+            MoedaImg.Source = moeda.Flip() + ".png";
+
+
+            int sorteio = moeda.LadoSorteado == "Cara" ? 0 : 1;
+            
+            /*
+             if (pickselect == sorteio )
              {
                  await DisplayAlert("Parabéns!", "Você ganhou!", "OK");
+                  seq++;
              }
              else
              {
                  await DisplayAlert("Que pena!", "Você perdeu. Tente novamente.", "OK");
              }
-         }
+            */
+
+            if (jogo.CheckWinner(SelecaoPicker.SelectedIndex, sorteio))
+            {
+                DisplayAlert("Parabéns", "Você venceu!", "Ok");
+            }
+            else
+            {
+                DisplayAlert("Se ferrou", "Você perdeu!", "Ok");
+            }
+
+            PlayerPointLabel.Text = $"Você ganhou {jogo.PlayerPoint} vezes ao todo.";
+            StreakLabel.Text = $"Você ganhou {jogo.Streak} vezes em sequencia.";
+
+
+
+        }
+
+       
 
     }
 

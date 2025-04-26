@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Microsoft.Maui.ApplicationModel.Permissions;
 
 namespace CoinFlip
 {
@@ -15,7 +16,7 @@ namespace CoinFlip
         public string LadoSorteado { get => ladoSorteado; set => ladoSorteado = value; } //L para usar o metodo get e set
 
         //metodo costuma ser publico
-        public Coin() 
+        public Coin()
         {
             //metodo construtor, metodo com o mesmo nome da classe se torna o construtor 
         }
@@ -23,20 +24,21 @@ namespace CoinFlip
         public string Flip()
         {
             Random random = new Random();
-           
-           /* if (random.Next(2) == 0)
-            {
-                LadoSorteado = "Cara";
-            }
-            else
-            {
-                LadoSorteado = "Coroa";
-            }
-           */
+
+            /* if (random.Next(2) == 0)
+             {
+                 LadoSorteado = "Cara";
+             }
+             else
+             {
+                 LadoSorteado = "Coroa";
+             }
+            */
 
             //operador ternario so serve quando vou fazer uma atribuição no IF
             LadoSorteado = random.Next(2) == 0 ? "Cara" : "Coroa";
             return (LadoSorteado);
         }
+       
     }
 }
